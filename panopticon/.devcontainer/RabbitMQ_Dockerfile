@@ -1,0 +1,2 @@
+FROM rabbitmq:3.11-management
+COPY rabbitmq/rabbitmq.conf rabbitmq/enabled_plugins /etc/rabbitmq/
