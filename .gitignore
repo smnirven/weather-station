@@ -1,1 +1,2 @@
-panopticon/.devcontainer/rabbitmq/*
+panopticon/.devcontainer/rabbitmq/data
+panopticon/.devcontainer/rabbitmq/log
