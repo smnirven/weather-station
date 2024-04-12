@@ -37,7 +37,8 @@ services:
     
   # You can include other services not opened by VS Code as well
   timescaledb:
-    image: timescale/timescaledb-ha:pg14-latest
+    image: timescale/timescaledb-ha:pg16
+    platform: linux/amd64
     restart: unless-stopped
     environment:
       - POSTGRES_PASSWORD=letmein
