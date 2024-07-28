@@ -16,7 +16,7 @@ def main():
 
     mqttc = get_mqtt_client()
 
-    db_conn = psycopg2.connect("host=localhost dbname=postgres user=postgres password=letmein")
+    db_conn = psycopg2.connect("host=timescaledb dbname=postgres user=postgres password=letmein")
 
     def on_message(client, userdata, msg):
         msg_str = msg.payload.decode()
@@ -25,10 +25,10 @@ def main():
         ts = datetime.now()
         cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
             (1, 1, ts, message['temp_c']))
-        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
-            (1, 2, ts, message['humidity']))
-        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
-            (1, 3, ts, message['pressure']))
+        # cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
+        #     (1, 2, ts, message['humidity']))
+        # cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
+        #     (1, 3, ts, message['pressure']))
         db_conn.commit()
         print(" [x] Received %r" % message)
 

@@ -1,11 +1,11 @@
 
 version: '3'
-
+name: panopticon
 services:
   panopticon:
     build: 
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: docker/Panopticon.Dockerfile
       # [Optional] You can use build args to set options. e.g. 'VARIANT' below affects the image in the Dockerfile
       args: 
         VARIANT: buster
@@ -56,8 +56,8 @@ services:
 
   rabbitmq:
     build: 
-      context: .
-      dockerfile: RabbitMQ_Dockerfile
+      context: ../
+      dockerfile: docker/MqttBroker.Dockerfile
     restart: unless-stopped
     environment:
       - RABBITMQ_DEFAULT_USER=admin
