@@ -1,6 +1,11 @@
 FROM python:3.11-slim-bullseye
 
-RUN pip install poetry
+RUN pip install poetry && \
+    apt-get update -y
+    apt-get install -y build-essential libpq-dev python3-dev
 
 COPY ./pyproject.toml ./poetry.lock ./
-RUN poetry install --only consumer --no-interaction --no-ansi -vvv
+RUN poetry install --no-interaction --no-ansi -vvv
+COPY ./consumer.py .
+
+ENTRYPOINT ["poetry", "run", "python", "consumer.py"]

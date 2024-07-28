@@ -28,3 +28,6 @@ SELECT create_hypertable('readings', 'time');
 CREATE INDEX readings_sensors_idx ON readings (sensor_id, time desc);
 CREATE INDEX readings_sensors_metrics_idx ON readings (sensor_id, metric_id, time desc);
 
+INSERT INTO sensors (id, type, location) VALUES (1, 'temperature', 'weather_station');
+INSERT INTO metrics (id, name, data_type, units) VALUES (1, 'temperature', 'double', 'degrees_celcius');
+

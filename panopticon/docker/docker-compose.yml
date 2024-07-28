@@ -67,13 +67,12 @@ services:
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq/
       - rabbitmq-logs:/var/log/rabbitmq
+  consumer:
+    build: 
+      context: ../
+      dockerfile: ./.devcontainer/Consumer.Dockerfile
+    restart: unless-stopped
 volumes:
   timescale-data:
   rabbitmq-data:
   rabbitmq-logs:
-  # consumer:
-  #   build: 
-  #     context: ../
-  #     dockerfile: ./.devcontainer/Consumer_Dockerfile
-  #   restart: unless-stopped
-  #   command: /bin/sh -c "while sleep 1000; do :; done"
