@@ -57,7 +57,6 @@ services:
       context: ../
       dockerfile: docker/MqttBroker.Dockerfile
     restart: unless-stopped
-    hostname: hyperion.local
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=letmein
