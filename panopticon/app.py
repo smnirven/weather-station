@@ -1,14 +1,17 @@
 # Run this app with `python app.py` and
 # visit http://127.0.0.1:8050/ in your web browser.
 
+import os
+
 from dash import Dash, html, dcc, callback, Input, Output
 import plotly.express as px
 import pandas as pd
 import dash_bootstrap_components as dbc
 import sqlalchemy as sql
 
-app = Dash(__name__)
+PANOPTICON_HOST = os.environ.get("PANOPTICON_HOST", "127.0.0.1")
 
+app = Dash(__name__)
 
 def get_sql_engine():
     return sql.engine.create_engine(
@@ -137,4 +140,4 @@ def update_graph(granularity, lookback):
 #     ]
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True, host=PANOPTICON_HOST)
