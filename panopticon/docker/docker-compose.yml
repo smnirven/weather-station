@@ -70,7 +70,7 @@ services:
   consumer:
     build: 
       context: ../
-      dockerfile: ./.devcontainer/Consumer.Dockerfile
+      dockerfile: docker/Consumer.Dockerfile
     restart: unless-stopped
 volumes:
   timescale-data:
