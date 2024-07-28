@@ -1,7 +1,7 @@
 FROM python:3.11-slim-bullseye
 
 RUN pip install poetry && \
-    apt-get update -y
+    apt-get update -y && \
     apt-get install -y build-essential libpq-dev python3-dev
 
 COPY ./pyproject.toml ./poetry.lock ./
