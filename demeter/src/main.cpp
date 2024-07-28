@@ -49,19 +49,17 @@ void setup() {
     }
     delay(5000);
   }
-
-  Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
   Serial.println("Hello World, I'm connected to the internets!!");
 
-  Serial.println("connecting to mqtt broker...");
-  client.begin(MQTT_BROKER, 1883, net);
+  Serial.println("Connecting to mqtt broker...");
+  client.begin(MQTT_BROKER, MQTT_PORT, net);
   while (!client.connect("arduino", "admin", "letmein")) {
     Serial.print(".");
-    delay(1000);
+    delay(5000);
   }
   
   // Setup BME280 atmospheric sensor
@@ -77,22 +75,19 @@ void setup() {
 void loop() {
   unsigned long loopStart = millis();
   DynamicJsonDocument doc(1024);
-  Serial.print(" Temp: ");
   float tempC = bme280Sensor.readTempC();
   float humidity = bme280Sensor.readFloatHumidity();
   float pressure = bme280Sensor.readFloatPressure();
-  float altitudeM = bme280Sensor.readFloatAltitudeMeters();
-  Serial.println(tempC, 2);
   // Serial.print(mySensor.readTempF(), 2);
-  doc[String("temp_c")] = tempC;
-  doc[String("humidity")] = humidity;
+  doc[String("internal_temp_c")] = tempC;
+  doc[String("relative_humidity")] = humidity;
   doc[String("pressure")] = pressure;
-  doc[String("altitudeM")] = altitudeM;
   doc[String("timestamp_ms")] = millis();
   String payload;
   serializeJson(doc, payload);
   client.publish("readings", payload);
+  Serial.println(payload);
   unsigned long executionMillis = millis() - loopStart;
-  Serial.println(executionMillis);
+  // Serial.println(executionMillis);
   delay(5000);
 }
