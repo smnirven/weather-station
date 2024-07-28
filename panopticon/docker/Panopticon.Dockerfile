@@ -8,4 +8,4 @@ COPY ./pyproject.toml ./poetry.lock ./
 RUN poetry install --no-interaction --no-ansi -vvv
 COPY ./app.py .
 
-ENTRYPOINT ["poetry", "run", "python", "app.py"]
+# ENTRYPOINT ["poetry", "run", "python", "app.py"]
