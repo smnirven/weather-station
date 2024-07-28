@@ -71,6 +71,11 @@ services:
     build: 
       context: ../
       dockerfile: docker/Consumer.Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_started
+      timescaledb:
+        condition: service_started
     restart: unless-stopped
 volumes:
   timescale-data:
