@@ -56,6 +56,12 @@ services:
     build: 
       context: ../
       dockerfile: docker/MqttBroker.Dockerfile
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     restart: unless-stopped
     environment:
       - RABBITMQ_DEFAULT_USER=admin
@@ -73,7 +79,7 @@ services:
       dockerfile: docker/Consumer.Dockerfile
     depends_on:
       rabbitmq:
-        condition: service_started
+        condition: service_healthy
       timescaledb:
         condition: service_started
     restart: unless-stopped
