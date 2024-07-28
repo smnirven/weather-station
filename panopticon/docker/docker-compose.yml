@@ -47,7 +47,7 @@ services:
     ports:
       - "5432:5432"
     volumes: 
-      - ./postgres-data:/var/lib/postgresql/data
+      - timescale-data:/var/lib/postgresql/data
       # copy the sql script to create tables
       - ../schema.sql:/docker-entrypoint-initdb.d/schema.sql
     # As in the "app" service, use "forwardPorts" in **devcontainer.json** to forward an app port locally.
@@ -65,9 +65,12 @@ services:
       - 5672:5672
       - 15672:15672
     volumes:
-      - ./rabbitmq/data/:/var/lib/rabbitmq/
-      - ./rabbitmq/log/:/var/log/rabbitmq
-
+      - rabbitmq-data:/var/lib/rabbitmq/
+      - rabbitmq-logs:/var/log/rabbitmq
+volumes:
+  timescale-data:
+  rabbitmq-data:
+  rabbitmq-logs:
   # consumer:
   #   build: 
   #     context: ../
