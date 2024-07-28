@@ -4,6 +4,9 @@ services:
     build: 
       context: ../
       dockerfile: docker/Panopticon.Dockerfile
+    depends_on:
+      timescaledb:
+        condition: service_started
     ports:
       - 8050:8050
     
