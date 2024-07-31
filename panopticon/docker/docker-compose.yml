@@ -11,6 +11,13 @@ services:
       - PANOPTICON_HOST=0.0.0.0
     ports:
       - 8050:8050
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+     - '3000:3000'
     
   # You can include other services not opened by VS Code as well
   timescaledb:
