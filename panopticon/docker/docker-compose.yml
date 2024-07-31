@@ -7,8 +7,8 @@ services:
     depends_on:
       timescaledb:
         condition: service_started
-    # environment:
-    #   - PANOPTICON_HOST=192.168.50.75
+    environment:
+      - PANOPTICON_HOST=192.168.50.75
     ports:
       - 8050:8050
     

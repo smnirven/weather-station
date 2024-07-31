@@ -140,4 +140,4 @@ def update_graph(granularity, lookback):
 #     ]
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host=PANOPTICON_HOST, port=8050)
