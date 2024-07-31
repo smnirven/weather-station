@@ -4,7 +4,6 @@ services:
     build: 
       context: ../
       dockerfile: docker/Panopticon.Dockerfile
-    command: /bin/sh -c "while sleep 1000; do :; done"  
     depends_on:
       timescaledb:
         condition: service_started
