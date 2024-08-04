@@ -19,14 +19,11 @@ def main():
     db_conn = psycopg2.connect("host=timescaledb dbname=postgres user=postgres password=letmein")
 
     def on_message(client, userdata, msg):
-        msg_str = msg.payload.decode()
         message = json.loads(msg.payload.decode())
         cur = db_conn.cursor()
         ts = datetime.now()
-        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
-            (1, 1, ts, message['internal_temp_c']))
-        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
-            (1, 2, ts, message['relative_humidity']))
+        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s), (%s, %s, %s, %s)",
+            (1, 1, ts, message['internal_temp_c']), (1, 2, ts, message['relative_humidity']))
         # cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
         #     (1, 3, ts, message['pressure']))
         db_conn.commit()
