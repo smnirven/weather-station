@@ -23,7 +23,7 @@ def main():
         cur = db_conn.cursor()
         ts = datetime.now()
         cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s), (%s, %s, %s, %s)",
-            (1, 1, ts, message['internal_temp_c']), (1, 2, ts, message['relative_humidity']))
+            (1, 1, ts, message['internal_temp_c'], 1, 2, ts, message['relative_humidity']))
         # cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
         #     (1, 3, ts, message['pressure']))
         db_conn.commit()
