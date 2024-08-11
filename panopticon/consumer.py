@@ -22,10 +22,10 @@ def main():
         message = json.loads(msg.payload.decode())
         cur = db_conn.cursor()
         ts = datetime.now()
-        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s), (%s, %s, %s, %s)",
-            (1, 1, ts, message['internal_temp_c'], 1, 2, ts, message['relative_humidity']))
-        # cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s)",
-        #     (1, 3, ts, message['pressure']))
+        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, double) VALUES (%s, %s, %s, %s), (%s, %s, %s, %s), (%s, %s, %s, %s), (%s, %s, %s, %s)",
+            (1, 1, ts, message['internal_temp_c'], 1, 2, ts, message['relative_humidity'], 1, 3, ts, message['total_rainfall_mm'], 1, 4, ts, message['wind_speed_kph']))
+        cur.execute("INSERT INTO readings (sensor_id, metric_id, time, integer) VALUES (%s, %s, %s, %s)",
+            (1, 5, ts, message['wind_direction_deg']))
         db_conn.commit()
         print(" [x] Received %r" % message)
 
